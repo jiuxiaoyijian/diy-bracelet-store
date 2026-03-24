@@ -219,6 +219,8 @@ const state = {
   engraving: catalog.recipes.mist.engraving,
   styleName: catalog.recipes.mist.styleName,
   delivery: "express",
+  drawerExpanded: false,
+  mobileCheckoutOpen: false,
 };
 
 const baseOptions = document.querySelector("#base-options");
@@ -232,12 +234,37 @@ const engravingInput = document.querySelector("#engraving-input");
 const stepChips = [...document.querySelectorAll(".step-chip")];
 const panels = [...document.querySelectorAll(".step-panel")];
 const recipePills = [...document.querySelectorAll(".recipe-pill")];
+const flowPanel = document.querySelector(".flow-panel");
+const customizerSection = document.querySelector("#customizer");
 const modal = document.querySelector("#checkout-modal");
 const modalBody = document.querySelector("#modal-body");
 const successPanel = document.querySelector("#success-panel");
 const checkoutForm = document.querySelector("#checkout-form");
+const drawerToggle = document.querySelector("#toggle-drawer");
+const drawerToggleState = document.querySelector("#drawer-toggle-state");
+const mobileStepCounter = document.querySelector("#mobile-step-counter");
+const mobileStepTitle = document.querySelector("#mobile-step-title");
+const drawerProgressFill = document.querySelector("#drawer-progress-fill");
+const mobileActionPrice = document.querySelector("#mobile-action-price");
+const mobileActionCaption = document.querySelector("#mobile-action-caption");
+const mobilePrevStep = document.querySelector("#mobile-prev-step");
+const mobileNextStep = document.querySelector("#mobile-next-step");
+const mobilePreviewPrice = document.querySelector("#mobile-preview-price");
+const mobilePreviewCount = document.querySelector("#mobile-preview-count");
 
 const currency = (value) => `¥ ${value}`;
+const stepMeta = [
+  { title: "选主链", next: "选尺寸" },
+  { title: "选尺寸", next: "排珠材" },
+  { title: "排珠材", next: "加吊饰" },
+  { title: "加吊饰", next: "礼盒刻字" },
+  { title: "礼盒刻字", next: "确认下单" },
+  { title: "确认下单", next: "生成订单单" },
+];
+
+function isMobileViewport() {
+  return window.matchMedia("(max-width: 768px)").matches;
+}
 
 function getBase() {
   return catalog.bases.find((item) => item.id === state.base);
@@ -408,9 +435,9 @@ function renderDesignStrip() {
             <span>${currency(bead.price)} · ${bead.tag}</span>
           </div>
           <div class="strip-actions">
-            <button data-action="left" type="button" aria-label="左移">←</button>
-            <button data-action="right" type="button" aria-label="右移">→</button>
-            <button data-action="remove" type="button" aria-label="删除">×</button>
+            <button data-action="left" type="button" aria-label="前移">前移</button>
+            <button data-action="right" type="button" aria-label="后移">后移</button>
+            <button data-action="remove" type="button" aria-label="移除">移除</button>
           </div>
         </div>
       `;
@@ -476,6 +503,8 @@ function renderSummary() {
     : "待选择";
   document.querySelector("#review-gift").textContent = `${packageName}${state.engraving.trim() ? ` · 刻字「${state.engraving.trim()}」` : ""}`;
   document.querySelector("#review-price").textContent = currency(totalPrice());
+  mobilePreviewPrice.textContent = currency(totalPrice());
+  mobilePreviewCount.textContent = `${state.beads.length} 颗`;
 }
 
 function renderCheckoutSummary() {
@@ -508,6 +537,13 @@ function renderRecipes() {
   });
 }
 
+function setDrawerState(expanded = state.drawerExpanded) {
+  state.drawerExpanded = expanded;
+  flowPanel.classList.toggle("is-expanded", expanded);
+  drawerToggle.setAttribute("aria-expanded", String(expanded));
+  drawerToggleState.textContent = expanded ? "收起" : "展开";
+}
+
 function renderSteps() {
   stepChips.forEach((chip) => {
     chip.classList.toggle("is-active", Number(chip.dataset.step) === state.step);
@@ -519,6 +555,14 @@ function renderSteps() {
 
   document.querySelector("#prev-step").disabled = state.step === 0;
   document.querySelector("#next-step").textContent = state.step === panels.length - 1 ? "完成这套配置" : "下一步";
+  mobilePrevStep.disabled = state.step === 0;
+  mobileNextStep.textContent = state.step === panels.length - 1 ? "去确认" : "下一步";
+  mobileStepCounter.textContent = `${String(state.step + 1).padStart(2, "0")} / ${String(stepMeta.length).padStart(2, "0")}`;
+  mobileStepTitle.textContent = stepMeta[state.step].title;
+  drawerProgressFill.style.width = `${((state.step + 1) / stepMeta.length) * 100}%`;
+  mobileActionPrice.textContent = currency(totalPrice() + deliveryFee());
+  mobileActionCaption.textContent =
+    state.step === panels.length - 1 ? "确认后生成订单单" : `下一步：${stepMeta[state.step].next}`;
 }
 
 function renderAll() {
@@ -533,7 +577,25 @@ function renderAll() {
   renderCheckoutSummary();
   renderRecipes();
   renderSteps();
+  setDrawerState(state.drawerExpanded);
   engravingInput.value = state.engraving;
+}
+
+function focusMobileComposer() {
+  if (!isMobileViewport()) return;
+  customizerSection.scrollIntoView({ behavior: "smooth", block: "start" });
+  flowPanel.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function setStep(nextStep, shouldFocus = true) {
+  state.step = Math.max(0, Math.min(panels.length - 1, nextStep));
+  if (isMobileViewport()) {
+    setDrawerState(true);
+  }
+  renderSteps();
+  if (shouldFocus) {
+    focusMobileComposer();
+  }
 }
 
 function applyRecipe(recipeKey) {
@@ -589,14 +651,19 @@ function updateStyleName() {
 
 function openModal() {
   renderCheckoutSummary();
+  state.mobileCheckoutOpen = true;
   modal.hidden = false;
   modalBody.hidden = false;
   successPanel.hidden = true;
   checkoutForm.elements.delivery.value = state.delivery;
   document.body.style.overflow = "hidden";
+  if (isMobileViewport()) {
+    modalBody.scrollTo({ top: 0, behavior: "auto" });
+  }
 }
 
 function closeModal() {
+  state.mobileCheckoutOpen = false;
   modal.hidden = true;
   document.body.style.overflow = "";
 }
@@ -691,20 +758,17 @@ document.querySelector("#reset-pattern").addEventListener("click", () => applyRe
 
 stepChips.forEach((chip) => {
   chip.addEventListener("click", () => {
-    state.step = Number(chip.dataset.step);
-    renderSteps();
+    setStep(Number(chip.dataset.step));
   });
 });
 
 document.querySelector("#prev-step").addEventListener("click", () => {
-  state.step = Math.max(0, state.step - 1);
-  renderSteps();
+  setStep(state.step - 1);
 });
 
 document.querySelector("#next-step").addEventListener("click", () => {
   if (state.step < panels.length - 1) {
-    state.step += 1;
-    renderSteps();
+    setStep(state.step + 1);
     return;
   }
 
@@ -712,15 +776,27 @@ document.querySelector("#next-step").addEventListener("click", () => {
 });
 
 document.querySelector("#jump-review").addEventListener("click", () => {
-  state.step = panels.length - 1;
-  renderSteps();
-  document.querySelector("#customizer").scrollIntoView({ behavior: "smooth", block: "start" });
+  setStep(panels.length - 1);
 });
 
 document.querySelector("#open-checkout").addEventListener("click", openModal);
 document.querySelector("#open-checkout-final").addEventListener("click", openModal);
 document.querySelector("#close-modal").addEventListener("click", closeModal);
 document.querySelector("#close-success").addEventListener("click", closeModal);
+drawerToggle.addEventListener("click", () => {
+  setDrawerState(!state.drawerExpanded);
+});
+mobilePrevStep.addEventListener("click", () => {
+  setStep(state.step - 1);
+});
+mobileNextStep.addEventListener("click", () => {
+  if (state.step < panels.length - 1) {
+    setStep(state.step + 1);
+    return;
+  }
+
+  openModal();
+});
 
 modal.addEventListener("click", (event) => {
   if (event.target instanceof HTMLElement && event.target.dataset.closeModal === "true") {
@@ -742,6 +818,7 @@ checkoutForm.addEventListener("submit", (event) => {
 checkoutForm.elements.delivery.addEventListener("change", (event) => {
   state.delivery = event.target.value;
   renderCheckoutSummary();
+  renderSteps();
 });
 
 window.addEventListener("keydown", (event) => {
@@ -750,6 +827,10 @@ window.addEventListener("keydown", (event) => {
   }
 });
 
-window.addEventListener("resize", renderPreview);
+window.addEventListener("resize", () => {
+  renderPreview();
+  renderSteps();
+  setDrawerState(state.drawerExpanded);
+});
 
 renderAll();
