@@ -126,6 +126,193 @@
             <h2>从选主链到下单确认，把手作店的完整体验搬到线上。</h2>
           </div>
 
+          <section class="mobile-editor-shell" aria-label="移动端手链编辑器">
+            <div class="mobile-editor-status">
+              <div class="mobile-status-price">
+                <strong id="mobile-status-price">¥ 268</strong>
+                <span id="mobile-status-count">/ 8 颗</span>
+              </div>
+              <div class="mobile-status-chip">
+                建议手围：<span id="mobile-status-size">16.3 - 17.0 cm</span>
+              </div>
+              <button class="mobile-status-help" id="mobile-status-help" type="button">
+                指南
+              </button>
+            </div>
+
+            <div class="mobile-editor-view is-active" data-mobile-view="atelier">
+              <div class="mobile-stage-shell">
+                <div class="mobile-stage-disc">
+                  <div
+                    class="bracelet-orbit mobile-bracelet-orbit"
+                    id="mobile-bracelet-orbit"
+                    aria-label="移动端手链预览"
+                  ></div>
+                </div>
+
+                <div class="mobile-floating-tools">
+                  <button class="mobile-float-button" id="mobile-zoom-toggle" type="button">
+                    看细节
+                  </button>
+                  <button class="mobile-float-button" id="mobile-undo" type="button">撤销</button>
+                </div>
+              </div>
+
+              <div class="mobile-quick-tools">
+                <button class="mobile-tool-button" id="mobile-tool-size" type="button">
+                  设置手围
+                </button>
+                <button class="mobile-tool-button" id="mobile-tool-toggle" type="button">
+                  切换吊饰
+                </button>
+                <button class="mobile-tool-button" id="mobile-tool-reset" type="button">
+                  重置设计
+                </button>
+                <button class="mobile-tool-button" id="mobile-tool-save" type="button">
+                  保存设计
+                </button>
+              </div>
+
+              <div class="mobile-search-row">
+                <label class="mobile-search-field" for="mobile-material-search">
+                  <span>搜</span>
+                  <input
+                    id="mobile-material-search"
+                    type="search"
+                    placeholder="奶霜 / 青柠 / 曲奇 / 蜜蜡..."
+                  />
+                </label>
+                <button class="mobile-cart-button" id="mobile-add-cart" type="button">
+                  加入购物车
+                </button>
+              </div>
+
+              <div class="mobile-material-panel">
+                <div class="mobile-material-tabs" id="mobile-material-tabs">
+                  <button class="mobile-material-tab is-active" data-material-tab="beads" type="button">
+                    珠材
+                  </button>
+                  <button class="mobile-material-tab" data-material-tab="charms" type="button">
+                    吊饰
+                  </button>
+                  <button class="mobile-material-tab" data-material-tab="bases" type="button">
+                    主链
+                  </button>
+                  <button class="mobile-material-tab" data-material-tab="packages" type="button">
+                    礼盒
+                  </button>
+                </div>
+
+                <div class="mobile-material-body" id="mobile-material-body">
+                  <aside class="mobile-bead-groups" id="mobile-bead-groups"></aside>
+                  <div class="mobile-material-main" id="mobile-material-main"></div>
+                </div>
+              </div>
+            </div>
+
+            <section class="mobile-editor-view" data-mobile-view="ideas">
+              <div class="mobile-view-card">
+                <div class="mobile-view-copy">
+                  <p class="eyebrow">灵感配方</p>
+                  <h3>把现成的配色灵感，一键套进你的编辑器。</h3>
+                </div>
+                <div class="mobile-ideas-list" id="mobile-ideas-list"></div>
+              </div>
+            </section>
+
+            <section class="mobile-editor-view" data-mobile-view="saved">
+              <div class="mobile-view-card">
+                <div class="mobile-view-copy">
+                  <p class="eyebrow">我的设计</p>
+                  <h3>这里会保存你临时喜欢的配色和礼赠方案。</h3>
+                </div>
+                <div class="mobile-saved-list" id="mobile-saved-list"></div>
+              </div>
+            </section>
+
+            <section class="mobile-editor-view" data-mobile-view="cart">
+              <div class="mobile-view-card mobile-cart-view">
+                <div class="mobile-view-copy">
+                  <p class="eyebrow">购物车</p>
+                  <h3>确认设计、填写配送信息，然后生成订单草稿。</h3>
+                </div>
+
+                <div class="mobile-cart-items" id="mobile-cart-items"></div>
+
+                <form class="mobile-cart-form" id="mobile-cart-form">
+                  <label>
+                    收件人 / 称呼
+                    <input name="name" type="text" placeholder="例如 林小姐" required />
+                  </label>
+                  <label>
+                    联系方式
+                    <input name="contact" type="text" placeholder="手机号 / 微信" required />
+                  </label>
+                  <label>
+                    配送方式
+                    <select name="delivery">
+                      <option value="express">顺丰寄出</option>
+                      <option value="pickup">线下自取</option>
+                      <option value="gift">直接寄给收礼人</option>
+                    </select>
+                  </label>
+                  <label>
+                    备注
+                    <textarea
+                      name="note"
+                      rows="4"
+                      placeholder="例如 想整体偏奶白、送礼日期 4 月 6 日"
+                    ></textarea>
+                  </label>
+                  <label class="checkbox-row">
+                    <input name="consent" type="checkbox" required />
+                    <span>我已确认这是手工定制商品，排布与天然石纹理会有轻微差异。</span>
+                  </label>
+                  <button class="button-primary wide" type="submit">生成订单草稿</button>
+                </form>
+
+                <div class="mobile-cart-success" id="mobile-cart-success" hidden>
+                  <p class="eyebrow">已生成</p>
+                  <h3>订单草稿已经准备好啦。</h3>
+                  <p id="mobile-order-code">订单编号：BR-240318</p>
+                </div>
+              </div>
+            </section>
+
+            <section class="mobile-editor-view" data-mobile-view="home">
+              <div class="mobile-view-card">
+                <div class="mobile-view-copy">
+                  <p class="eyebrow">品牌首页</p>
+                  <h3>回到店铺首页，继续看主打系列和手作日记。</h3>
+                </div>
+                <div class="mobile-home-links">
+                  <button class="mobile-home-link" data-home-target="#hero" type="button">
+                    看主打橱窗
+                  </button>
+                  <button class="mobile-home-link" data-home-target="#collections" type="button">
+                    看灵感系列
+                  </button>
+                  <button class="mobile-home-link" data-home-target="#journal" type="button">
+                    看手作日记
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <nav class="mobile-tabbar" id="mobile-tabbar" aria-label="移动端导航">
+              <button class="mobile-tab is-active" data-mobile-tab="atelier" type="button">
+                工坊
+              </button>
+              <button class="mobile-tab" data-mobile-tab="ideas" type="button">灵感</button>
+              <button class="mobile-tab" data-mobile-tab="saved" type="button">我的设计</button>
+              <button class="mobile-tab mobile-tab-cart" data-mobile-tab="cart" type="button">
+                购物车
+                <span class="mobile-tab-badge" id="mobile-cart-badge">0</span>
+              </button>
+              <button class="mobile-tab" data-mobile-tab="home" type="button">主页</button>
+            </nav>
+          </section>
+
           <div class="builder-shell">
             <aside class="preview-panel">
               <div class="preview-card">
