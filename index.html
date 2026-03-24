@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>腕间工坊 | DIY 手链独立站</title>
+    <meta
+      name="description"
+      content="为 DIY 手链品牌打造的独立站原型，支持选主链、选珠材、排布组合、礼盒与刻字、订单确认等完整交互。"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand-mark" href="#hero">
+          <span class="brand-dot"></span>
+          <span>
+            <strong>腕间工坊</strong>
+            <small>DIY Bracelet Atelier</small>
+          </span>
+        </a>
+        <nav class="site-nav" aria-label="站点导航">
+          <a href="#collections">灵感系列</a>
+          <a href="#customizer">DIY 定制</a>
+          <a href="#journal">手作日记</a>
+        </nav>
+        <a class="header-cta" href="#customizer">开始制作</a>
+      </header>
+
+      <main>
+        <section class="hero-section" id="hero">
+          <div class="hero-copy">
+            <p class="eyebrow">准备上线的小店感 · 一眼就想点进来的手作首饰站</p>
+            <h1>把喜欢的珠材、吊饰和刻字，串成一条只属于你的手链。</h1>
+            <p class="hero-description">
+              这是一套为 DIY 手链品牌设计的独立站原型，兼顾移动端和桌面端浏览体验。
+              用户可以一路完成选链、选珠、编排、礼盒与下单确认，实时看到作品预览和价格变化。
+            </p>
+
+            <div class="hero-actions">
+              <a class="button-primary" href="#customizer">立即定制</a>
+              <a class="button-secondary" href="#journal">看看灵感</a>
+            </div>
+
+            <div class="hero-metrics">
+              <article>
+                <strong>48h</strong>
+                <span>下单后手工制作</span>
+              </article>
+              <article>
+                <strong>3 步</strong>
+                <span>快速套用灵感配方</span>
+              </article>
+              <article>
+                <strong>1 对 1</strong>
+                <span>支持礼赠留言卡</span>
+              </article>
+            </div>
+          </div>
+
+          <div class="hero-stage">
+            <div class="stage-card stage-product">
+              <div class="stage-product-head">
+                <span>本周主推</span>
+                <strong>月光手作 · 晨雾奶白</strong>
+              </div>
+              <div class="hero-bracelet-preview" aria-hidden="true">
+                <span class="hero-bead bead-blush"></span>
+                <span class="hero-bead bead-cream"></span>
+                <span class="hero-bead bead-gold"></span>
+                <span class="hero-bead bead-sea"></span>
+                <span class="hero-bead bead-cream"></span>
+                <span class="hero-bead bead-stone"></span>
+                <span class="hero-bead bead-blush"></span>
+                <span class="hero-bead bead-gold"></span>
+              </div>
+              <div class="stage-product-foot">
+                <span>适合春夏叠戴</span>
+                <span>¥ 268 起</span>
+              </div>
+            </div>
+
+            <div class="stage-card stage-note">
+              <p>“像在逛一家真正的小店，点一点就能把手链搭出来。”</p>
+              <span>店主备忘</span>
+            </div>
+
+            <div class="stage-card stage-tag-cloud">
+              <span>天然石</span>
+              <span>淡水贝珠</span>
+              <span>可刻字</span>
+              <span>礼物包装</span>
+              <span>节气主题</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="collection-section" id="collections">
+          <div class="section-heading">
+            <p class="eyebrow">灵感系列</p>
+            <h2>像店铺橱窗一样，先把氛围立住。</h2>
+          </div>
+          <div class="collection-grid">
+            <article class="collection-card">
+              <span class="collection-badge">Daily Glow</span>
+              <h3>晨雾奶白</h3>
+              <p>白贝珠、粉晶与细金隔珠，适合日常通勤与叠戴。</p>
+            </article>
+            <article class="collection-card">
+              <span class="collection-badge">Ocean Mood</span>
+              <h3>海盐蓝调</h3>
+              <p>蓝纹石与月光灰组合，清透、安静，很适合夏日衬衫。</p>
+            </article>
+            <article class="collection-card">
+              <span class="collection-badge">Gift Edit</span>
+              <h3>月弧礼赠</h3>
+              <p>包金链基底配弯月吊饰，可加字母刻牌，适合礼物场景。</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="customizer-section" id="customizer">
+          <div class="section-heading">
+            <p class="eyebrow">DIY 定制流程</p>
+            <h2>从选主链到下单确认，把手作店的完整体验搬到线上。</h2>
+          </div>
+
+          <div class="builder-shell">
+            <aside class="preview-panel">
+              <div class="preview-card">
+                <div class="preview-header">
+                  <div>
+                    <p class="preview-label">实时作品预览</p>
+                    <h3 id="preview-title">月弧包金链</h3>
+                  </div>
+                  <span class="status-pill">实时同步</span>
+                </div>
+
+                <div class="bracelet-orbit" id="bracelet-orbit" aria-label="手链预览"></div>
+
+                <div class="preview-info">
+                  <div>
+                    <span>当前风格</span>
+                    <strong id="preview-style">晨雾奶白</strong>
+                  </div>
+                  <div>
+                    <span>制作周期</span>
+                    <strong>2-4 个工作日</strong>
+                  </div>
+                </div>
+
+                <div class="summary-card">
+                  <div class="summary-row">
+                    <span>主链与尺寸</span>
+                    <strong id="summary-base">月弧包金链 · 16 cm</strong>
+                  </div>
+                  <div class="summary-row">
+                    <span>珠材数量</span>
+                    <strong id="summary-beads-count">8 颗</strong>
+                  </div>
+                  <div class="summary-row">
+                    <span>吊饰与礼盒</span>
+                    <strong id="summary-charms">弯月吊饰 · 新月礼盒</strong>
+                  </div>
+                  <div class="summary-row total-row">
+                    <span>预计价格</span>
+                    <strong id="summary-price">¥ 268</strong>
+                  </div>
+                </div>
+
+                <div class="summary-actions">
+                  <button class="button-primary" id="open-checkout" type="button">
+                    生成订单单
+                  </button>
+                  <button class="button-ghost" id="jump-review" type="button">
+                    查看最终确认
+                  </button>
+                </div>
+              </div>
+            </aside>
+
+            <div class="flow-panel">
+              <div class="stepper" id="stepper" aria-label="DIY 流程">
+                <button class="step-chip is-active" data-step="0" type="button">1 选主链</button>
+                <button class="step-chip" data-step="1" type="button">2 选尺寸</button>
+                <button class="step-chip" data-step="2" type="button">3 排珠材</button>
+                <button class="step-chip" data-step="3" type="button">4 加吊饰</button>
+                <button class="step-chip" data-step="4" type="button">5 礼盒刻字</button>
+                <button class="step-chip" data-step="5" type="button">6 确认下单</button>
+              </div>
+
+              <section class="step-panel is-active" data-panel="0">
+                <div class="panel-copy">
+                  <p class="eyebrow">Step 1</p>
+                  <h3>先定下基调，选一条最像你的主链。</h3>
+                  <p>不同基底会直接影响整条手链的气质和佩戴方式。</p>
+                </div>
+                <div class="option-grid" id="base-options"></div>
+              </section>
+
+              <section class="step-panel" data-panel="1">
+                <div class="panel-copy">
+                  <p class="eyebrow">Step 2</p>
+                  <h3>尺寸决定佩戴感，贴手还是松弛感都可以。</h3>
+                  <p>建议先按常戴手表或手链尺寸选择，也支持礼赠预设。</p>
+                </div>
+                <div class="size-grid" id="size-options"></div>
+              </section>
+
+              <section class="step-panel" data-panel="2">
+                <div class="panel-copy">
+                  <p class="eyebrow">Step 3</p>
+                  <h3>挑珠材、拖顺序，排出一条真正独一份的作品。</h3>
+                  <p>点击素材卡可加入到手链序列，支持左右挪动、删除和一键生成平衡排布。</p>
+                </div>
+
+                <div class="recipe-row" id="recipe-row">
+                  <button class="recipe-pill is-active" data-recipe="mist" type="button">
+                    晨雾奶白
+                  </button>
+                  <button class="recipe-pill" data-recipe="ocean" type="button">
+                    海盐蓝调
+                  </button>
+                  <button class="recipe-pill" data-recipe="amber" type="button">
+                    琥珀星轨
+                  </button>
+                </div>
+
+                <div class="option-grid beads-grid" id="bead-options"></div>
+
+                <div class="design-editor">
+                  <div class="editor-head">
+                    <div>
+                      <h4>你的排布序列</h4>
+                      <p>推荐控制在 8-12 颗，视觉会更完整。</p>
+                    </div>
+                    <div class="editor-actions">
+                      <button class="button-ghost small" id="balance-pattern" type="button">
+                        一键平衡排布
+                      </button>
+                      <button class="button-ghost small" id="reset-pattern" type="button">
+                        恢复当前灵感配方
+                      </button>
+                    </div>
+                  </div>
+                  <div class="design-strip" id="design-strip"></div>
+                </div>
+              </section>
+
+              <section class="step-panel" data-panel="3">
+                <div class="panel-copy">
+                  <p class="eyebrow">Step 4</p>
+                  <h3>用吊饰完成点睛，让礼物更有记忆点。</h3>
+                  <p>最多可选择 2 个吊饰，建议保留一主一辅的节奏。</p>
+                </div>
+                <div class="option-grid" id="charm-options"></div>
+              </section>
+
+              <section class="step-panel" data-panel="4">
+                <div class="panel-copy">
+                  <p class="eyebrow">Step 5</p>
+                  <h3>礼盒、留言卡和刻字细节，会让礼物体验更完整。</h3>
+                  <p>刻字支持 8 个字符以内，系统会同步到订单摘要中。</p>
+                </div>
+
+                <div class="option-grid" id="package-options"></div>
+
+                <div class="engraving-panel">
+                  <label for="engraving-input">刻字内容</label>
+                  <input
+                    id="engraving-input"
+                    type="text"
+                    maxlength="8"
+                    placeholder="例如 LUNA / 0314"
+                  />
+                  <small>留空则不加刻字牌。</small>
+                </div>
+              </section>
+
+              <section class="step-panel" data-panel="5">
+                <div class="panel-copy">
+                  <p class="eyebrow">Step 6</p>
+                  <h3>最后确认一次，再把它送进你的订单单里。</h3>
+                  <p>这里会汇总选材、尺寸和礼赠信息，方便顾客在下单前快速核对。</p>
+                </div>
+
+                <div class="review-shell" id="review-shell">
+                  <article class="review-card">
+                    <span>作品名称</span>
+                    <strong id="review-name">月弧包金链 · 晨雾奶白</strong>
+                  </article>
+                  <article class="review-card">
+                    <span>珠材明细</span>
+                    <strong id="review-beads">白贝珠、粉晶、虎眼石等</strong>
+                  </article>
+                  <article class="review-card">
+                    <span>礼赠配置</span>
+                    <strong id="review-gift">新月礼盒 · 刻字牌</strong>
+                  </article>
+                  <article class="review-card">
+                    <span>预计总价</span>
+                    <strong id="review-price">¥ 268</strong>
+                  </article>
+                </div>
+
+                <div class="review-note">
+                  <p>提交后可继续在客服对话中补充手围、配色偏好或礼赠日期。</p>
+                  <button class="button-primary" id="open-checkout-final" type="button">
+                    进入下单确认
+                  </button>
+                </div>
+              </section>
+
+              <div class="step-nav">
+                <button class="button-secondary" id="prev-step" type="button">上一步</button>
+                <button class="button-primary" id="next-step" type="button">下一步</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="journal-section" id="journal">
+          <div class="section-heading">
+            <p class="eyebrow">手作日记</p>
+            <h2>让站点不仅能卖货，也能承接品牌氛围。</h2>
+          </div>
+
+          <div class="journal-grid">
+            <article>
+              <h3>从灵感板到成品图</h3>
+              <p>记录每个配方的颜色来源、珠材故事和适合的穿搭场景。</p>
+            </article>
+            <article>
+              <h3>礼物包装小剧场</h3>
+              <p>用一张卡片、一段文案和一只礼盒，把“送礼”动机讲得更完整。</p>
+            </article>
+            <article>
+              <h3>佩戴与保养说明</h3>
+              <p>降低售后沟通成本，也增加顾客对天然石和手作感的理解。</p>
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div>
+          <strong>腕间工坊</strong>
+          <p>适合手作饰品独立站的完整交互原型。</p>
+        </div>
+        <a href="#hero">回到顶部</a>
+      </footer>
+    </div>
+
+    <div class="modal-shell" id="checkout-modal" hidden>
+      <div class="modal-backdrop" data-close-modal="true"></div>
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="checkout-title">
+        <button class="modal-close" id="close-modal" type="button" aria-label="关闭">
+          ×
+        </button>
+
+        <div class="modal-body" id="modal-body">
+          <div class="checkout-summary">
+            <p class="eyebrow">订单确认</p>
+            <h3 id="checkout-title">把这条手链加入你的下单单</h3>
+            <div class="checkout-lines" id="checkout-lines"></div>
+            <div class="checkout-total">
+              <span>预计到手价</span>
+              <strong id="checkout-total">¥ 280</strong>
+            </div>
+          </div>
+
+          <form class="checkout-form" id="checkout-form">
+            <label>
+              收件人 / 称呼
+              <input name="name" type="text" placeholder="例如 林小姐" required />
+            </label>
+            <label>
+              联系方式
+              <input name="contact" type="text" placeholder="手机号 / 微信" required />
+            </label>
+            <label>
+              配送方式
+              <select name="delivery">
+                <option value="express">顺丰寄出</option>
+                <option value="pickup">线下自取</option>
+                <option value="gift">直接寄给收礼人</option>
+              </select>
+            </label>
+            <label>
+              备注
+              <textarea
+                name="note"
+                rows="4"
+                placeholder="例如 想要整体偏奶白、送礼日期 4 月 6 日"
+              ></textarea>
+            </label>
+
+            <label class="checkbox-row">
+              <input name="consent" type="checkbox" required />
+              <span>我已确认这是手工定制商品，排布与天然石纹理会有轻微差异。</span>
+            </label>
+
+            <button class="button-primary wide" type="submit">确认生成订单单</button>
+          </form>
+        </div>
+
+        <div class="success-panel" id="success-panel" hidden>
+          <p class="eyebrow">已生成</p>
+          <h3>你的订单草稿已经准备好啦。</h3>
+          <p id="order-code">订单编号：BR-240318</p>
+          <p>下一步可以接微信客服、支付流程或真实订单系统。</p>
+          <button class="button-primary" id="close-success" type="button">继续逛逛</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
